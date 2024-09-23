@@ -1,24 +1,98 @@
-# Compiled class file
-*.class
+# Bỏ qua các file và thư mục hệ điều hành
+.DS_Store
+*.swp
+*.swo
+Thumbs.db
 
-# Log file
+# Bỏ qua các thư mục build
+/build/
+*/build/
+
+# Bỏ qua file cấu hình của Android Studio
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/misc.xml
+.idea/codestyles/Project.xml
+.idea/codeStyles/Project.xml
+.idea/.name
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
+
+# Bỏ qua các tệp cấu hình khác của Android Studio
+*.iml
+.gradle
+/local.properties
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/tasks.xml
+/.idea/dictionaries
+/.idea/vcs.xml
+/.idea/jsLinters
+/.idea/sqlDataSources.xml
+/.idea/runConfigurations.xml
+
+# Bỏ qua các tệp Gradle
+.gradle/
+/build/
+*/build/
+**/local.properties
+**/gradle-wrapper.properties
+**/gradle-wrapper.jar
+.gradle/
+
+# Bỏ qua các tệp nhật ký và file lock
 *.log
+*.lock
 
-# BlueJ files
-*.ctxt
+# Bỏ qua tệp liên quan đến ký kết (signing)
+**/signing.properties
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Bỏ qua các file liên quan đến NDK
+**/obj/
+**/jniLibs/
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# Bỏ qua tệp liên quan đến Android emulators
+*.hprof
+.idea/runConfigurations/Android_App.xml
+.idea/runConfigurations/Android_Test.xml
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Bỏ qua file liên quan đến Firebase
+google-services.json
+.firebase/
+
+# Bỏ qua các tệp đầu ra của bộ dịch (compiler outputs)
+/captures/
+
+# Bỏ qua tệp liên quan đến Android Studio profiling
+*.hprof
+
+# Bỏ qua tệp liên quan đến tests
+.idea/runConfigurations/*.xml
+**/*.class
+**/test-output/
+**/build/reports/tests/test/index.html
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/gradle.xml
+.idea/jarRepositories.xml
+
+# Bỏ qua các file cache và file hệ thống tạm thời khác
+.idea/gradle.xml
+.idea/jarRepositories.xml
+.idea/assetWizardSettings.xml
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/scopes/scope_settings.xml
+.idea/tasks.xml
+.idea/vcs.xml
+.idea/codeStyles/Project.xml
+.idea/codeStyles/codeStyleConfig.xml
+*.out/
+*.tmp/
