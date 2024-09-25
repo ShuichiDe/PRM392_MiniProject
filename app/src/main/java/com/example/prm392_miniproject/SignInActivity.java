@@ -28,7 +28,6 @@ public class SignInActivity  extends AppCompatActivity implements View.OnClickLi
         btnSignin = (Button) findViewById(R.id.signIn);
         btnSignin.setOnClickListener(this);
     }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -37,8 +36,6 @@ public class SignInActivity  extends AppCompatActivity implements View.OnClickLi
                     txtPassWord.getText().toString());
         }
     }
-
-
     private boolean validateInput(String user, String pass) {
         if (TextUtils.isEmpty(user)) {
             txtUserName.setError(REQUIRE);
