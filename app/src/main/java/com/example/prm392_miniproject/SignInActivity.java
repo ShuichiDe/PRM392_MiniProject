@@ -1,41 +1,38 @@
 package com.example.prm392_miniproject;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SignInActivity  extends AppCompatActivity implements View.OnClickListener {
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText txtUserName;
     private EditText txtPassWord;
-    private TextView btnNotHaveAccount;
     private Button btnSignin;
     private final String REQUIRE = "require";
 
-    @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        txtUserName = (EditText) findViewById(R.id.userName);
-        txtPassWord = (EditText) findViewById(R.id.password);
-        btnSignin = (Button) findViewById(R.id.signIn);
+
+        txtUserName = findViewById(R.id.userName);
+        txtPassWord = findViewById(R.id.password);
+        btnSignin = findViewById(R.id.signIn);
         btnSignin.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-         if (id == R.id.signIn) {
-            signIn(txtUserName.getText().toString(),
-                    txtPassWord.getText().toString());
+        if (v.getId() == R.id.signIn) {
+            signIn(txtUserName.getText().toString(), txtPassWord.getText().toString());
         }
     }
+
     private boolean validateInput(String user, String pass) {
         if (TextUtils.isEmpty(user)) {
             txtUserName.setError(REQUIRE);
@@ -52,10 +49,10 @@ public class SignInActivity  extends AppCompatActivity implements View.OnClickLi
         if (!validateInput(user, pass)) {
             return;
         }
-        Intent intent = new Intent(this, MainActivity.class);
+        // Add authentication logic if needed
 
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
-
 }

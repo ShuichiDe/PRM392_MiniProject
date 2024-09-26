@@ -1,17 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:id="@+id/main">
     <TextView
-        android:id="@+id/textViewHello"
+        android:id="@+id/playerMoneyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="204dp"
-        android:text="HELLO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Số tiền của bạn: 1000"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:layout_editor_absoluteX="-182dp"
+        tools:layout_editor_absoluteY="-219dp">
+
+        <EditText
+            android:id="@+id/betAmountInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập số tiền cược"
+            android:inputType="number" />
+
+        <RadioGroup
+            android:id="@+id/horseSelectionGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radio_horse1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chó 1" />
+
+            <RadioButton
+                android:id="@+id/radio_horse2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chó 2" />
+
+            <RadioButton
+                android:id="@+id/radio_horse3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chó 3" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/betButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đặt Cược" />
+
+        <SeekBar
+            android:id="@+id/dog1"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:max="100"
+            android:thumb="@drawable/dog_2"
+            />
+
+        <SeekBar
+            android:id="@+id/dog2"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:max="100"
+            android:thumb="@drawable/dog_2053837"/>
+
+        <SeekBar
+            android:id="@+id/dog3"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:max="100"
+            android:thumb="@drawable/corgi_4364608"/>
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:text="Bắt Đầu Đua" />
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
