@@ -5,21 +5,25 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    private SeekBar horse1, horse2, horse3;
-    private Button startButton;
+    private SeekBar dog1, dog2, dog3;
+    private Button startButton, placeBetButton;
+    private TextView betAmountInput, playerMoneyText;
+    private RadioGroup horseSelectionGroup;
+    private int playerMoney = 1000;
+    private int betAmount;
+    private int selectedHorse;
+    private boolean hasPlacedBet = false;
     private Handler handler;
     private Runnable runnable;
 
@@ -27,71 +31,124 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        horse1 = findViewById(R.id.horse1);
-        horse2 = findViewById(R.id.horse2);
-        horse3 = findViewById(R.id.horse3);
+        dog1 = findViewById(R.id.dog1);
+        dog2 = findViewById(R.id.dog2);
+        dog3 = findViewById(R.id.dog3);
         startButton = findViewById(R.id.startButton);
+        placeBetButton = findViewById(R.id.betButton);
+        betAmountInput = findViewById(R.id.betAmountInput);
+        playerMoneyText = findViewById(R.id.playerMoneyText);
+        horseSelectionGroup = findViewById(R.id.horseSelectionGroup);
+
         handler = new Handler();
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
+        updatePlayerMoneyText();
+        placeBetButton.setOnClickListener(v -> placeBet());
         startButton.setOnClickListener(v -> startRace());
     }
 
-    private void startRace() {
-        horse1.setProgress(0);
-        horse2.setProgress(0);
-        horse3.setProgress(0);
+    private void updatePlayerMoneyText() {
+        playerMoneyText.setText("Số tiền của bạn: " + playerMoney);
+    }
 
-        // Reset the handler and runnable
+    private void placeBet() {
+        String betAmountString = betAmountInput.getText().toString();
+        if (betAmountString.isEmpty()) {
+            Toast.makeText(this, "Hãy nhập số tiền cược!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        betAmount = Integer.parseInt(betAmountString);
+        if (betAmount > playerMoney) {
+            Toast.makeText(this, "Số tiền cược vượt quá số tiền bạn có!", Toast.LENGTH_SHORT).show();
+        } else if (betAmount <= 0) {
+            Toast.makeText(this, "Số tiền cược phải lớn hơn 0!", Toast.LENGTH_SHORT).show();
+        } else {
+            int selectedHorseId = horseSelectionGroup.getCheckedRadioButtonId();
+            if (selectedHorseId == -1) {
+                Toast.makeText(this, "Hãy chọn một con chó để đặt cược!", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (selectedHorseId == R.id.radio_horse1) {
+                selectedHorse = 1;
+            } else if (selectedHorseId == R.id.radio_horse2) {
+                selectedHorse = 2;
+            } else if (selectedHorseId == R.id.radio_horse3) {
+                selectedHorse = 3;
+            }
+
+            hasPlacedBet = true;
+            Toast.makeText(this, "Đặt cược thành công! Chó " + selectedHorse + " được chọn.", Toast.LENGTH_SHORT).show();
+            startButton.setEnabled(true); // Kích hoạt nút bắt đầu đua
+        }
+    }
+
+    private void startRace() {
+        if (!hasPlacedBet) {
+            Toast.makeText(this, "Hãy đặt cược trước khi bắt đầu cuộc đua!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        dog1.setProgress(0);
+        dog2.setProgress(0);
+            dog3.setProgress(0);
+
         handler.removeCallbacks(runnable);
         runnable = new Runnable() {
             @Override
             public void run() {
                 updateHorses();
-                if (horse1.getProgress() < 100 && horse2.getProgress() < 100 && horse3.getProgress() < 100) {
-                    handler.postDelayed(this, 100); // Update every 100 milliseconds
+                if (dog1.getProgress() < 100 && dog2.getProgress() < 100 && dog3.getProgress() < 100) {
+                    handler.postDelayed(this, 100);
                 } else {
                     determineWinner();
                 }
             }
         };
 
-        handler.post(runnable); // Start the race
+        handler.post(runnable);
     }
 
     private void updateHorses() {
         Random random = new Random();
-        horse1.setProgress(horse1.getProgress() + random.nextInt(10));
-        horse2.setProgress(horse2.getProgress() + random.nextInt(10));
-        horse3.setProgress(horse3.getProgress() + random.nextInt(10));
+        dog1.setProgress(dog1.getProgress() + random.nextInt(10));
+        dog2.setProgress(dog2.getProgress() + random.nextInt(10));
+        dog3.setProgress(dog3.getProgress() + random.nextInt(10));
     }
 
     private void determineWinner() {
-        int progress1 = horse1.getProgress();
-        int progress2 = horse2.getProgress();
-        int progress3 = horse3.getProgress();
+        int progress1 = dog1.getProgress();
+        int progress2 = dog2.getProgress();
+        int progress3 = dog3.getProgress();
 
+        int winningHorse;
         if (progress1 >= 100) {
-            showWinner("Horse 1 Wins!");
+            winningHorse = 1;
         } else if (progress2 >= 100) {
-            showWinner("Horse 2 Wins!");
+            winningHorse = 2;
         } else if (progress3 >= 100) {
-            showWinner("Horse 3 Wins!");
+            winningHorse = 3;
         } else {
-            showWinner("It's a Tie!");
+            return;
         }
-    }
 
-    private void showWinner(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        handler.removeCallbacks(runnable); // Stop the race
+        if (winningHorse == selectedHorse) {
+            playerMoney += betAmount;
+            Toast.makeText(this, "Bạn đã thắng! Chó " + winningHorse + " đã chiến thắng!", Toast.LENGTH_LONG).show();
+        } else {
+            playerMoney -= betAmount;
+            Toast.makeText(this, "Bạn đã thua! Chó " + winningHorse + " đã chiến thắng!", Toast.LENGTH_LONG).show();
+        }
+        updatePlayerMoneyText();
+        if (playerMoney <= 0) {
+            Toast.makeText(this, "Bạn đã hết tiền! Trò chơi kết thúc.", Toast.LENGTH_LONG).show();
+            startButton.setEnabled(false);
+            placeBetButton.setEnabled(false);
+        }
+
+        hasPlacedBet = false;
+        startButton.setEnabled(false);
     }
 }
