@@ -27,6 +27,7 @@
             android:exported="true">
         </activity>
         <activity android:name=".MainMenuActivity" />
+        <activity android:name=".RestartActivity" />
         <activity android:name=".TutorialActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
     </application>

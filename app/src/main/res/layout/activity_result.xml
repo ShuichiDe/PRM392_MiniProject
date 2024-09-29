@@ -8,6 +8,17 @@
     tools:context=".ResultActivity">
 
     <!-- TextView to display the result -->
+
+    <Button
+        android:id="@+id/finishRaceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Finish Race"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="292dp" />
+
     <TextView
         android:id="@+id/resultTextView"
         android:layout_width="wrap_content"
