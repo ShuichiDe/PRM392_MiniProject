@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main">
+    android:id="@+id/main"
+    android:background="@drawable/play_background"> <!-- Nền tối -->
+
     <TextView
         android:id="@+id/playerMoneyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Số tiền của bạn: 1000"
         android:textSize="18sp"
+        android:textColor="@android:color/white"
         android:layout_gravity="center_horizontal"
-        android:paddingBottom="16dp"/>
+        android:paddingBottom="16dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:layout_editor_absoluteX="-182dp"
-        tools:layout_editor_absoluteY="-219dp">
+        android:gravity="center_horizontal"> <!-- Đặt Gravity cho LinearLayout -->
 
         <EditText
             android:id="@+id/betAmountInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nhập số tiền cược"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@color/colorAccent" />.<!-- Màu nổi bật cho văn bản -->
+
 
         <RadioGroup
             android:id="@+id/horseSelectionGroup"
@@ -37,56 +42,77 @@
                 android:id="@+id/radio_horse1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chó 1" />
+                android:text="Chó 1"
+                android:textColor="@color/colorAccent"
+                android:buttonTint="@color/colorAccent" />
 
             <RadioButton
                 android:id="@+id/radio_horse2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chó 2" />
+                android:text="Chó 2"
+                android:textColor="@color/colorAccent"
+                android:buttonTint="@color/colorAccent" />
 
             <RadioButton
                 android:id="@+id/radio_horse3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chó 3" />
+                android:text="Chó 3"
+                android:textColor="@color/colorAccent"
+                android:buttonTint="@color/colorAccent" />
         </RadioGroup>
 
         <Button
             android:id="@+id/betButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Đặt Cược" />
+            android:text="Đặt Cược"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/button_color" /> <!-- Màu cho nút -->
 
+        <!-- SeekBars với thumb đã được giữ lại -->
         <SeekBar
             android:id="@+id/dog1"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:max="100"
-            android:thumb="@drawable/dog_2"
-            />
+            android:progressTint="@color/seekbar_progress"
+            android:thumb="@drawable/dog_2" />
 
         <SeekBar
             android:id="@+id/dog2"
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:max="100"
-            android:thumb="@drawable/dog_2053837"/>
+            android:progressTint="@color/seekbar_progress"
+            android:thumb="@drawable/dog_2053837" />
 
         <SeekBar
             android:id="@+id/dog3"
             android:layout_width="match_parent"
             android:layout_height="47dp"
             android:max="100"
-            android:thumb="@drawable/corgi_4364608"/>
+            android:progressTint="@color/seekbar_progress"
+            android:thumb="@drawable/corgi_4364608" />
 
         <Button
             android:id="@+id/startButton"
             android:layout_width="match_parent"
             android:layout_height="76dp"
-            android:text="Bắt Đầu Đua" />
+            android:text="Bắt Đầu Đua"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/button_color" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quay lại"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/button_color"
+            android:paddingTop="16dp"
+            android:gravity="center_horizontal" />
 
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

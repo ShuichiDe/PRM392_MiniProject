@@ -10,6 +10,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean hasPlacedBet = false;
     private Handler handler;
     private Runnable runnable;
+    private Button btnBack;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,6 +48,26 @@ public class MainActivity extends AppCompatActivity {
         updatePlayerMoneyText();
         placeBetButton.setOnClickListener(v -> placeBet());
         startButton.setOnClickListener(v -> startRace());
+
+        // Thêm nút "Quay lại"
+        btnBack = findViewById(R.id.btnBack);
+
+        // Xử lý sự kiện khi nhấn nút "Quay lại"
+        btnBack.setOnClickListener(v -> {
+            // Sử dụng OnBackPressedDispatcher để xử lý quay lại
+            getOnBackPressedDispatcher().onBackPressed();
+        });
+
+        // Đăng ký callback cho hành vi khi nhấn nút "Back"
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Logic tùy chỉnh khi nhấn nút "Back"
+                Toast.makeText(MainActivity.this, "Nút quay lại được nhấn", Toast.LENGTH_SHORT).show();
+                finish(); // Quay lại hoặc kết thúc Activity
+            }
+        });
+
     }
 
     private void updatePlayerMoneyText() {
@@ -151,4 +173,5 @@ public class MainActivity extends AppCompatActivity {
         hasPlacedBet = false;
         startButton.setEnabled(false);
     }
+
 }

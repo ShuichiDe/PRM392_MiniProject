@@ -1,0 +1,30 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- Nút vào chơi -->
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vào chơi"
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_gravity="center"/>
+
+    <!-- Nút hướng dẫn -->
+    <Button
+        android:id="@+id/tutorial_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hướng dẫn"
+        android:textSize="18sp"
+        android:padding="12dp"
+        android:layout_gravity="center"/>
+</LinearLayout>

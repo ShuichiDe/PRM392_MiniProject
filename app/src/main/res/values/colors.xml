@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="button_color">#FF9800</color> <!-- Màu cam cho nút -->
+    <color name="radio_button_tint">#FFFFFF</color> <!-- Màu trắng cho RadioButton -->
+    <color name="seekbar_progress">#FF5722</color> <!-- Màu tiến trình của SeekBar -->
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorHint">#B0BEC5</color>
 </resources>

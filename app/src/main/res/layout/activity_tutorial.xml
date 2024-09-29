@@ -1,0 +1,87 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTutorialTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hướng dẫn chơi đua chó"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="16dp" />
+
+        <ImageView
+            android:id="@+id/imgTutorial"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/dog_race"
+            android:contentDescription="Game Image" />
+
+        <TextView
+            android:id="@+id/tvTutorialText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to our mini game! Here are the basic instructions to get you started:"
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvTutorialStep1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Press the 'Start Game' button to begin the game."
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvTutorialStep2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Follow the on-screen instructions to control your character."
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvTutorialStep3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Collect points and avoid obstacles to achieve the highest score."
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvTutorialStep4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4. Press 'Pause' if you need a break during the game."
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvTutorialStep5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5. Enjoy and have fun!"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quay lại"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="16dp" />
+    </LinearLayout>
+</ScrollView>
