@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="@drawable/play_background"> <!-- Nền tối -->
+    android:background="@drawable/play_background">
 
     <TextView
         android:id="@+id/playerMoneyText"
@@ -24,44 +24,38 @@
         android:padding="16dp"
         android:gravity="center_horizontal"> <!-- Đặt Gravity cho LinearLayout -->
 
+        <!-- Thêm các trường nhập số tiền cược riêng biệt cho mỗi con chó -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhập số tiền cược cho từng chú chó"
+            android:textSize="16sp"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorAccent" />
+
         <EditText
-            android:id="@+id/betAmountInput"
+            android:id="@+id/betAmountInput1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập số tiền cược"
+            android:hint="Nhập số tiền cược cho Chó 1"
             android:inputType="number"
-            android:textColor="@color/colorAccent" />.<!-- Màu nổi bật cho văn bản -->
+            android:textColor="@color/colorAccent" />
 
-
-        <RadioGroup
-            android:id="@+id/horseSelectionGroup"
+        <EditText
+            android:id="@+id/betAmountInput2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:hint="Nhập số tiền cược cho Chó 2"
+            android:inputType="number"
+            android:textColor="@color/colorAccent" />
 
-            <RadioButton
-                android:id="@+id/radio_horse1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chó 1"
-                android:textColor="@color/colorAccent"
-                android:buttonTint="@color/colorAccent" />
-
-            <RadioButton
-                android:id="@+id/radio_horse2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chó 2"
-                android:textColor="@color/colorAccent"
-                android:buttonTint="@color/colorAccent" />
-
-            <RadioButton
-                android:id="@+id/radio_horse3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chó 3"
-                android:textColor="@color/colorAccent"
-                android:buttonTint="@color/colorAccent" />
-        </RadioGroup>
+        <EditText
+            android:id="@+id/betAmountInput3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nhập số tiền cược cho Chó 3"
+            android:inputType="number"
+            android:textColor="@color/colorAccent" />
 
         <Button
             android:id="@+id/betButton"
@@ -69,7 +63,7 @@
             android:layout_height="wrap_content"
             android:text="Đặt Cược"
             android:textColor="@android:color/white"
-            android:backgroundTint="@color/button_color" /> <!-- Màu cho nút -->
+            android:backgroundTint="@color/button_color" />
 
         <!-- SeekBars với thumb đã được giữ lại -->
         <SeekBar
