@@ -2,41 +2,55 @@ package com.example.prm392_miniproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private MoneyManager moneyManager;
+    private int playerMoney;
+    private boolean hasWon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        // Lấy dữ liệu từ BettingActivity
+        // Get data from Intent
         Intent intent = getIntent();
-        int betAmount = intent.getIntExtra("betAmount", 0);
-        int selectedHorse = intent.getIntExtra("selectedHorse", 0);
-        int playerMoney = intent.getIntExtra("playerMoney", 0);
+        playerMoney = intent.getIntExtra("playerMoney", 0);
+        hasWon = intent.getBooleanExtra("hasWon", false);
 
-        moneyManager = new MoneyManager(playerMoney);
+        // Get references to the UI elements
+        TextView resultTextView = findViewById(R.id.resultTextView);
+        TextView playerMoneyTextView = findViewById(R.id.playerMoneyTextView);
+        Button continueButton = findViewById(R.id.continueButton);
+        Button mainMenuButton = findViewById(R.id.mainMenuButton);
 
-        // Giả lập kết quả đua, ví dụ Chó 2 thắng
-        int winningHorse = 2;
-
-        TextView resultText = findViewById(R.id.resultText);
-        if (winningHorse == selectedHorse) {
-            moneyManager.addMoney(betAmount);
-            resultText.setText("Bạn đã thắng! Số tiền hiện tại: " + moneyManager.getPlayerMoney());
+        // Update UI based on the result
+        if (hasWon) {
+            resultTextView.setText("Chúc mừng! Bạn đã thắng cược.");
         } else {
-            moneyManager.subtractMoney(betAmount);
-            resultText.setText("Bạn đã thua! Số tiền hiện tại: " + moneyManager.getPlayerMoney());
+            resultTextView.setText("Rất tiếc! Bạn đã thua cược.");
         }
+        playerMoneyTextView.setText("Số tiền của bạn: " + playerMoney);
 
-        // Kiểm tra điều kiện game over
-        if (moneyManager.isGameOver()) {
-            resultText.setText(resultText.getText() + "\nGame Over! Bạn hết tiền.");
-        }
+        // Handle Continue button click
+        continueButton.setOnClickListener(v -> {
+            // Quay lại MainActivity với số tiền hiện tại
+            Intent continueIntent = new Intent(ResultActivity.this, MainActivity.class);
+            continueIntent.putExtra("playerMoney", playerMoney);  // Truyền số tiền hiện tại
+            startActivity(continueIntent);
+            finish();  // Kết thúc ResultActivity
+        });
+
+
+        // Handle Main Menu button click
+        mainMenuButton.setOnClickListener(v -> {
+            // Go back to the main menu or end the game
+            Intent mainMenuIntent = new Intent(ResultActivity.this, MainMenuActivity.class);
+            startActivity(mainMenuIntent);
+            finish();
+        });
     }
 }

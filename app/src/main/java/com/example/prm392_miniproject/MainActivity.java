@@ -1,6 +1,7 @@
 package com.example.prm392_miniproject;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Button startButton, placeBetButton;
     private TextView betAmountInput, playerMoneyText;
     private RadioGroup horseSelectionGroup;
-    private int playerMoney = 1000;
+    private int playerMoney = 100;
     private int betAmount;
     private int selectedHorse;
     private boolean hasPlacedBet = false;
@@ -68,7 +69,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (getIntent().hasExtra("playerMoney")) {
+            playerMoney = getIntent().getIntExtra("playerMoney", 100); // Giá trị mặc định là 100
+        } else {
+            playerMoney = 100;  // Số tiền mặc định nếu không có dữ liệu trước đó
+        }
+        updatePlayerMoneyText();
+
     }
+
 
     private void updatePlayerMoneyText() {
         playerMoneyText.setText("Số tiền của bạn: " + playerMoney);
@@ -153,19 +162,24 @@ public class MainActivity extends AppCompatActivity {
         } else if (progress3 >= 100) {
             winningHorse = 3;
         } else {
-            return;
+            return; // Kết thúc hàm nếu không có chú chó nào đạt đến 100
         }
 
-        if (winningHorse == selectedHorse) {
-            playerMoney += betAmount;
-            Toast.makeText(this, "Bạn đã thắng! Chó " + winningHorse + " đã chiến thắng!", Toast.LENGTH_LONG).show();
+        boolean hasWon = (winningHorse == selectedHorse);  // Kiểm tra kết quả thắng/thua
+        if (hasWon) {
+            playerMoney += betAmount;  // Cộng tiền nếu thắng
         } else {
-            playerMoney -= betAmount;
-            Toast.makeText(this, "Bạn đã thua! Chó " + winningHorse + " đã chiến thắng!", Toast.LENGTH_LONG).show();
+            playerMoney -= betAmount;  // Trừ tiền nếu thua
         }
-        updatePlayerMoneyText();
+
+        // Chuyển đến trang ResultActivity
+        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+        intent.putExtra("playerMoney", playerMoney);
+        intent.putExtra("hasWon", hasWon);
+        startActivity(intent);
+
+        // Nếu người chơi hết tiền
         if (playerMoney <= 0) {
-            Toast.makeText(this, "Bạn đã hết tiền! Trò chơi kết thúc.", Toast.LENGTH_LONG).show();
             startButton.setEnabled(false);
             placeBetButton.setEnabled(false);
         }
@@ -173,5 +187,8 @@ public class MainActivity extends AppCompatActivity {
         hasPlacedBet = false;
         startButton.setEnabled(false);
     }
+
+
+
 
 }
