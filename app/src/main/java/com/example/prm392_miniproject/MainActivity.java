@@ -151,7 +151,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
         playerMoney -= (betAmount1 + betAmount2 + betAmount3);
 
         boolean hasWon = false;

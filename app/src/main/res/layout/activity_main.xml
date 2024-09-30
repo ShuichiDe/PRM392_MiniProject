@@ -22,9 +22,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp"
-        android:gravity="center_horizontal"> <!-- Đặt Gravity cho LinearLayout -->
+        android:gravity="center_horizontal">
 
-        <!-- Thêm các trường nhập số tiền cược riêng biệt cho mỗi con chó -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +38,9 @@
             android:layout_height="wrap_content"
             android:hint="Nhập số tiền cược cho Chó 1"
             android:inputType="number"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:background="#B67F3B"
+            />
 
         <EditText
             android:id="@+id/betAmountInput2"
@@ -47,7 +48,8 @@
             android:layout_height="wrap_content"
             android:hint="Nhập số tiền cược cho Chó 2"
             android:inputType="number"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:background="#B67F3B"/>
 
         <EditText
             android:id="@+id/betAmountInput3"
@@ -55,7 +57,8 @@
             android:layout_height="wrap_content"
             android:hint="Nhập số tiền cược cho Chó 3"
             android:inputType="number"
-            android:textColor="@color/colorAccent" />
+            android:textColor="@color/colorAccent"
+            android:background="#B67F3B"/>
 
         <Button
             android:id="@+id/betButton"

@@ -1,0 +1,41 @@
+Index: app/src/main/java/com/example/prm392_miniproject/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.prm392_miniproject;\n\nimport android.annotation.SuppressLint;\nimport android.os.Bundle;\nimport android.os.Handler;\nimport android.view.View;\nimport android.widget.Button;\nimport android.widget.RadioGroup;\nimport android.widget.SeekBar;\nimport android.widget.TextView;\nimport android.widget.Toast;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport java.util.Random;\n\npublic class MainActivity extends AppCompatActivity {\n\n    private SeekBar dog1, dog2, dog3;\n    private Button startButton, placeBetButton;\n    private TextView betAmountInput, playerMoneyText;\n    private RadioGroup horseSelectionGroup;\n    private int playerMoney = 1000;\n    private int betAmount;\n    private int selectedHorse;\n    private boolean hasPlacedBet = false;\n    private Handler handler;\n    private Runnable runnable;\n\n    @SuppressLint(\"MissingInflatedId\")\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_main);\n\n        dog1 = findViewById(R.id.dog1);\n        dog2 = findViewById(R.id.dog2);\n        dog3 = findViewById(R.id.dog3);\n        startButton = findViewById(R.id.startButton);\n        placeBetButton = findViewById(R.id.betButton);\n        betAmountInput = findViewById(R.id.betAmountInput);\n        playerMoneyText = findViewById(R.id.playerMoneyText);\n        horseSelectionGroup = findViewById(R.id.horseSelectionGroup);\n\n        handler = new Handler();\n        updatePlayerMoneyText();\n        placeBetButton.setOnClickListener(v -> placeBet());\n        startButton.setOnClickListener(v -> startRace());\n    }\n\n    private void updatePlayerMoneyText() {\n        playerMoneyText.setText(\"Số tiền của bạn: \" + playerMoney);\n    }\n\n    private void placeBet() {\n        String betAmountString = betAmountInput.getText().toString();\n        if (betAmountString.isEmpty()) {\n            Toast.makeText(this, \"Hãy nhập số tiền cược!\", Toast.LENGTH_SHORT).show();\n            return;\n        }\n\n        betAmount = Integer.parseInt(betAmountString);\n        if (betAmount > playerMoney) {\n            Toast.makeText(this, \"Số tiền cược vượt quá số tiền bạn có!\", Toast.LENGTH_SHORT).show();\n        } else if (betAmount <= 0) {\n            Toast.makeText(this, \"Số tiền cược phải lớn hơn 0!\", Toast.LENGTH_SHORT).show();\n        } else {\n            int selectedHorseId = horseSelectionGroup.getCheckedRadioButtonId();\n            if (selectedHorseId == -1) {\n                Toast.makeText(this, \"Hãy chọn một con chó để đặt cược!\", Toast.LENGTH_SHORT).show();\n                return;\n            }\n\n            if (selectedHorseId == R.id.radio_horse1) {\n                selectedHorse = 1;\n            } else if (selectedHorseId == R.id.radio_horse2) {\n                selectedHorse = 2;\n            } else if (selectedHorseId == R.id.radio_horse3) {\n                selectedHorse = 3;\n            }\n\n            hasPlacedBet = true;\n            Toast.makeText(this, \"Đặt cược thành công! Chó \" + selectedHorse + \" được chọn.\", Toast.LENGTH_SHORT).show();\n            startButton.setEnabled(true); // Kích hoạt nút bắt đầu đua\n        }\n    }\n\n    private void startRace() {\n        if (!hasPlacedBet) {\n            Toast.makeText(this, \"Hãy đặt cược trước khi bắt đầu cuộc đua!\", Toast.LENGTH_SHORT).show();\n            return;\n        }\n\n        dog1.setProgress(0);\n        dog2.setProgress(0);\n            dog3.setProgress(0);\n\n        handler.removeCallbacks(runnable);\n        runnable = new Runnable() {\n            @Override\n            public void run() {\n                updateHorses();\n                if (dog1.getProgress() < 100 && dog2.getProgress() < 100 && dog3.getProgress() < 100) {\n                    handler.postDelayed(this, 100);\n                } else {\n                    determineWinner();\n                }\n            }\n        };\n\n        handler.post(runnable);\n    }\n\n    private void updateHorses() {\n        Random random = new Random();\n        dog1.setProgress(dog1.getProgress() + random.nextInt(10));\n        dog2.setProgress(dog2.getProgress() + random.nextInt(10));\n        dog3.setProgress(dog3.getProgress() + random.nextInt(10));\n    }\n\n    private void determineWinner() {\n        int progress1 = dog1.getProgress();\n        int progress2 = dog2.getProgress();\n        int progress3 = dog3.getProgress();\n\n        int winningHorse;\n        if (progress1 >= 100) {\n            winningHorse = 1;\n        } else if (progress2 >= 100) {\n            winningHorse = 2;\n        } else if (progress3 >= 100) {\n            winningHorse = 3;\n        } else {\n            return;\n        }\n\n        if (winningHorse == selectedHorse) {\n            playerMoney += betAmount;\n            Toast.makeText(this, \"Bạn đã thắng! Chó \" + winningHorse + \" đã chiến thắng!\", Toast.LENGTH_LONG).show();\n        } else {\n            playerMoney -= betAmount;\n            Toast.makeText(this, \"Bạn đã thua! Chó \" + winningHorse + \" đã chiến thắng!\", Toast.LENGTH_LONG).show();\n        }\n        updatePlayerMoneyText();\n        if (playerMoney <= 0) {\n            Toast.makeText(this, \"Bạn đã hết tiền! Trò chơi kết thúc.\", Toast.LENGTH_LONG).show();\n            startButton.setEnabled(false);\n            placeBetButton.setEnabled(false);\n        }\n\n        hasPlacedBet = false;\n        startButton.setEnabled(false);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/prm392_miniproject/MainActivity.java b/app/src/main/java/com/example/prm392_miniproject/MainActivity.java
+--- a/app/src/main/java/com/example/prm392_miniproject/MainActivity.java	(revision ec57ac74366335c6419f04d6503e8df422f396c6)
++++ b/app/src/main/java/com/example/prm392_miniproject/MainActivity.java	(date 1727334944422)
+@@ -123,23 +123,23 @@
+         int progress2 = dog2.getProgress();
+         int progress3 = dog3.getProgress();
+ 
+-        int winningHorse;
++        int winningdog;
+         if (progress1 >= 100) {
+-            winningHorse = 1;
++            winningdog = 1;
+         } else if (progress2 >= 100) {
+-            winningHorse = 2;
++            winningdog = 2;
+         } else if (progress3 >= 100) {
+-            winningHorse = 3;
++            winningdog = 3;
+         } else {
+             return;
+         }
+ 
+-        if (winningHorse == selectedHorse) {
++        if (winningdog == selectedHorse) {
+             playerMoney += betAmount;
+-            Toast.makeText(this, "Bạn đã thắng! Chó " + winningHorse + " đã chiến thắng!", Toast.LENGTH_LONG).show();
++            Toast.makeText(this, "Bạn đã thắng! Chó " + winningdog + " đã chiến thắng!", Toast.LENGTH_LONG).show();
+         } else {
+             playerMoney -= betAmount;
+-            Toast.makeText(this, "Bạn đã thua! Chó " + winningHorse + " đã chiến thắng!", Toast.LENGTH_LONG).show();
++            Toast.makeText(this, "Bạn đã thua! Chó " + winningdog + " đã chiến thắng!", Toast.LENGTH_LONG).show();
+         }
+         updatePlayerMoneyText();
+         if (playerMoney <= 0) {
