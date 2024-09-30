@@ -51,5 +51,12 @@ public class ResultActivity extends AppCompatActivity {
             startActivity(menuIntent);
             finish();
         });
+        Button restartButton = findViewById(R.id.finishRaceButton);
+        restartButton.setOnClickListener(v -> {
+            Intent menuIntent = new Intent(ResultActivity.this, RestartActivity.class);
+            menuIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(menuIntent);
+            finish();
+        });
     }
 }
